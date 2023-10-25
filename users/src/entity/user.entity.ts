@@ -32,4 +32,5 @@ export interface IUserService {
     loginUser(user: IUser, password: string): Promise<IUser>;
     updateUser(id: string, data: Partial<IUserDto>): Promise<IUser>;
     generateAccessToken(user: IUser): Promise<string>;
+    subscribeEvents(data: string): Promise<void>;
 }

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf build/ && tsc",
     "dev": "nodemon src/Bootstrap.ts",
-    "start": "node ./build/src/Bootstrap.js"
+    "start": "nodemon src/Bootstrap.ts"
   },
   "keywords": [],
   "author": "",

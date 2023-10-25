@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/amqplib": "^0.10.3",
     "@types/async-lock": "^1.4.1",
     "@types/bcrypt": "^5.0.1",
     "@types/cors": "^2.8.15",

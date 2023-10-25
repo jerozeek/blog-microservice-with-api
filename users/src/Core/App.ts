@@ -4,6 +4,7 @@ import * as mongoose from "mongoose";
 import {getDBConnectionUrl} from "./db";
 import {handlers} from "./middleware/app.middleware";
 import env from './utils/env';
+import {UsersMessageChannel} from "./Brokers/message.channel";
 
 export class App {
 
@@ -13,11 +14,13 @@ export class App {
 
     public static async init(): Promise<void> {
 
-        // initialize the database
-        await App.initDB();
+        const channel = await UsersMessageChannel();
 
         //app middleware
-        handlers(App.app);
+        handlers(App.app, channel);
+
+        // initialize the database
+        await App.initDB();
     }
 
     private static async initDB() {

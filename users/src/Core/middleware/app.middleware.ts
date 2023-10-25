@@ -3,11 +3,12 @@ import morgan from "morgan";
 import cors from "cors";
 import helmet from "helmet";
 import { CORS_CONFIG } from "../config/cors";
-import {Register} from "../Register";
 import createHttpError from "http-errors";
-import {UsersEvents} from "../events/app.events";
+import {authRoute} from "../../routes/auth.route";
+import {userRoute} from "../../routes/user.route";
+import amqplib from "amqplib";
 
-export const handlers = (app: Application): void => {
+export const handlers = (app: Application, channel: amqplib.Channel): void => {
 
     //allow express to parse json
     app.use(express.json());
@@ -20,11 +21,9 @@ export const handlers = (app: Application): void => {
 
     app.use(helmet());
 
-    //Register Events
-    UsersEvents(app);
-
     //routes
-    Register(app);
+    userRoute(app, channel);
+    authRoute(app, channel);
 
     //error handler
     app.use((req: Request, res: Response, next: NextFunction) => {
