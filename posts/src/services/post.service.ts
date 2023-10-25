@@ -75,10 +75,10 @@ export class PostService implements IPostsService {
         });
     }
 
-    public async subscribeEvents(payload:any): Promise<void> {
-        const { event, data } = payload;
+    public async subscribeEvents(payload:string): Promise<void> {
+        let payloadData = JSON.parse(payload);
+        const { event, data } = payloadData;
         const { postId, comment, userId } = data;
-
         switch (event) {
             case 'COMMENT_CREATED':
                 await this.addComments(postId, userId, comment);

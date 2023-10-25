@@ -7,7 +7,7 @@ export const CommentsEvents = (app:Application) => {
 
     app.use("/app-events", async (req: Request, res: Response, next: NextFunction) => {
         const { payload } = req.body;
-        await service.subscribeEvents(payload);
+        //await service.subscribeEvents(payload);
         console.log("==================================== POSTS EVENT  ====================================");
         return res.status(200).json(payload);
     });

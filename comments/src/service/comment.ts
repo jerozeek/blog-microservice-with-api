@@ -15,6 +15,7 @@ export class CommentService implements ICommentService {
             }
         });
     }
+
     public async getCommentsByPostId(postId: string): Promise<IComments[]> {
         return new Promise(async (resolve, reject) => {
             try {
@@ -27,15 +28,15 @@ export class CommentService implements ICommentService {
         });
     }
 
-    public async subscribeEvents(payload: any): Promise<void> {
-        const { event, data } = payload;
-
-        switch (event) {
-            case 'TEST_EVENTS':
-                console.log('TEST_EVENTS', data);
-                break;
-            default:
-                break;
-        }
-    }
+    // public async subscribeEvents(payload: any): Promise<void> {
+    //     const { event, data } = payload;
+    //
+    //     switch (event) {
+    //         case 'TEST_EVENTS':
+    //             console.log('TEST_EVENTS', data);
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 }

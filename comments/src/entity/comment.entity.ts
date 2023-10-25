@@ -23,5 +23,5 @@ export interface ICommentRepository {
 export interface ICommentService {
     createComment(data: ICommentsDto): Promise<IComments>;
     getCommentsByPostId(postId: string): Promise<IComments[]>;
-    subscribeEvents(payload:any): Promise<void>;
+    // subscribeEvents(payload:any): Promise<void>;
 }
