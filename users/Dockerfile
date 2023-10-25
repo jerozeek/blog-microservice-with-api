@@ -1,12 +1,12 @@
 FROM node
 
 # Create app directory
-WORKDIR /app/user
+WORKDIR /app/users
 
-COPY package*.json ./
+COPY package.json .
 
 RUN npm install
 
 COPY . .
-EXPOSE 9002
+EXPOSE 8002
 CMD [ "npm", "start" ]

@@ -11,7 +11,7 @@ export const userRoute = (app: Application, channel: amqplib.Channel) => {
 
     const userServices = UserFacade.Service();
 
-    app.post('/user/update-profile/:id', use((req:Request, res: Response) => {
+    app.post('/update-profile/:id', use((req:Request, res: Response) => {
         userServices.updateUser(req.params.id, req.body).then((user) => {
             return res.status(200).json(UserResource.single(user));
         }).
@@ -24,7 +24,7 @@ export const userRoute = (app: Application, channel: amqplib.Channel) => {
     }));
 
 
-    app.get('/user/get-profile', use((req:Request, res: Response) => {
+    app.get('/get-profile', use((req:Request, res: Response) => {
         userServices.getUser(req.body.id).then((user) => {
             return res.status(200).json(UserResource.single(user));
         }).

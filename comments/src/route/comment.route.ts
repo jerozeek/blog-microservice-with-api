@@ -15,7 +15,7 @@ export const commentRouter = (app:Application, channel: amqplib.Channel) => {
 
     const commentService: ICommentService = CommentFacade.Service();
 
-    app.post('/comments/create', [CommentAuth.canCreateComment], use((req: Request, res: Response) => {
+    app.post('/create', [CommentAuth.canCreateComment], use((req: Request, res: Response) => {
         commentService.createComment(CommentAuth.commentDto).then(async (comment) => {
 
             //get the payload from the request
@@ -45,7 +45,7 @@ export const commentRouter = (app:Application, channel: amqplib.Channel) => {
         });
     }))
 
-    app.get('/comments/get/:postId', use((req: Request, res: Response) => {
+    app.get('/get/:postId', use((req: Request, res: Response) => {
         commentService.getCommentsByPostId(req.params.postId).then(async (comments) => {
             return res.status(200).json({
                 status: 200,

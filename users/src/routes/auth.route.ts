@@ -1,4 +1,4 @@
-import {Application, Router, Response, Request} from 'express';
+import {Application, Response, Request} from 'express';
 import { Auth } from '../middleware/auth.middleware';
 import {use} from "../Core/middleware/use.middleware";
 import {throttle} from "../Core/middleware/throttle.middleware";
@@ -12,7 +12,7 @@ export const authRoute = (app: Application, channel: amqplib.Channel) => {
 
     const userServices = UserFacade.Service();
 
-    app.post('/user/auth/login', [Auth.canSignIn],  use((req: Request, res:Response) => {
+    app.post('/auth/login', [Auth.canSignIn],  use((req: Request, res:Response) => {
         userServices.loginUser(Auth.user, req.body.password).then(async (user) => {
             return res.status(200).json({
                 status: 200,
@@ -30,7 +30,7 @@ export const authRoute = (app: Application, channel: amqplib.Channel) => {
     }));
 
 
-    app.post('/user/auth/register', [Auth.canSignUp],  use((req: Request, res:Response) => {
+    app.post('/auth/register', [Auth.canSignUp],  use((req: Request, res:Response) => {
         userServices.createUser(req.body).then(async (user) => {
             return res.status(200).json({
                 status: 200,
@@ -49,4 +49,3 @@ export const authRoute = (app: Application, channel: amqplib.Channel) => {
 
 }
 
-const router = Router();

@@ -14,7 +14,7 @@ export const postsRouter = (app:Application, channel: amqplib.Channel) => {
 
     app.use(Auth.guard);
 
-    app.post('/posts/create', [PostsAuth.canCreatePosts], use((req: Request, res: Response) => {
+    app.post('/create', [PostsAuth.canCreatePosts], use((req: Request, res: Response) => {
         postsService.createPost(PostsAuth.postDto).then(async (post) => {
             res.status(201).json({
                 status: 201,
@@ -31,7 +31,7 @@ export const postsRouter = (app:Application, channel: amqplib.Channel) => {
     }))
 
 
-    app.get('/posts/user/get', use((req: Request, res: Response) => {
+    app.get('/user/get', use((req: Request, res: Response) => {
         postsService.getUsersPosts(req.user.id).then(async (posts) => {
             res.status(200).json({
                 status: 200,
@@ -47,7 +47,7 @@ export const postsRouter = (app:Application, channel: amqplib.Channel) => {
         });
     }));
 
-    app.get('/posts/all', use((req: Request, res: Response) => {
+    app.get('/all', use((req: Request, res: Response) => {
         postsService.getAllPosts().then(async (posts) => {
             res.status(200).json({
                 status: 200,
