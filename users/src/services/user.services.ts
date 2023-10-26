@@ -5,7 +5,6 @@ import {
     IUserService
 } from "../entity/user.entity";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 import env from "../Core/utils/env";
 
 export class UserServices implements IUserService {
@@ -15,8 +14,8 @@ export class UserServices implements IUserService {
     loginUser(user: IUser, password: string): Promise<IUser> {
         return new Promise(async (resolve, reject) => {
             try {
-                const isMatch = bcrypt.compareSync(password, user.password);
-                if (!isMatch) throw new Error("Invalid credentials");
+                const isMatch = (password === user.password);
+                if (!isMatch) return reject("Invalid credentials");
 
                 return resolve(user);
             }
@@ -40,10 +39,7 @@ export class UserServices implements IUserService {
     public async createUser(data: IUserDto): Promise<IUser> {
         return new Promise(async (resolve, reject) => {
             try {
-                const user = await this.userRepository.create({
-                    ...data,
-                    password: bcrypt.hashSync(data.password, 10)
-                });
+                const user = await this.userRepository.create(data);
                 return resolve(user);
             } catch (error) {
                 reject(error);

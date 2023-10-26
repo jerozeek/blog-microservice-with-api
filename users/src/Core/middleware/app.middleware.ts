@@ -4,7 +4,6 @@ import cors from "cors";
 import helmet from "helmet";
 import { CORS_CONFIG } from "../config/cors";
 import createHttpError from "http-errors";
-import {authRoute} from "../../routes/auth.route";
 import {userRoute} from "../../routes/user.route";
 import amqplib from "amqplib";
 
@@ -23,7 +22,6 @@ export const handlers = (app: Application, channel: amqplib.Channel): void => {
 
     //routes
     userRoute(app, channel);
-    authRoute(app, channel);
 
     //error handler
     app.use((req: Request, res: Response, next: NextFunction) => {
